@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <style>
+        .slabo { color: red; font-weight: bold; }
+        .srednio { color: orange; font-weight: bold; }
+        .dobrze { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <input id="ilosc" type="number" min="4" max="10">
+    <button id="losuj">Losuj</button>
+    <div id="wynik"></div>
+    <p id="wynikP"></p>
+    <p id="jakosc"></p>
+
+    <script>
+        function losowaLiczba(){
+            return Math.floor(Math.random()*6)+1;
+        }
+
+        $("#losuj").click(function(){
+            var tab = new Array(7).fill(0)
+            let n = $("#ilosc").val();
+            $("#wynik").html("")
+            $("#wynikP").html("")
+            $("#jakosc").html("")
+            for(var i=0; i<n; i++){
+                tab[losowaLiczba()]++;
+            }
+
+            for(let i=1; i<=6; i++){
+                for(let j=0; j<tab[i]; j++){
+                    $("#wynik").append(`<img src="${i}.jpg">`);
+                }
+            }
+
+            let punkty = 0;
+            for(let i=1; i<=6; i++){
+                if(tab[i]>1){
+                        punkty += tab[i] * i;
+                        $("#wynikP").append(`Numer kostki: ${i} Ilość: ${tab[i]}<br>`);
+                    }
+            }
+
+            let klasa = "";
+            let tekst = "";
+
+            if (punkty < 10) {
+                klasa = "slabo";
+                tekst = "Słabo";
+            } else if (punkty <= 20) {
+                klasa = "srednio";
+                tekst = "Średnio";
+            } else {
+                klasa = "dobrze";
+                tekst = "Dobrze";
+            }
+
+            $("#jakosc").html(`Wynik: ${punkty} pkt — ${tekst}`).attr("class", klasa);
+
+            
+        })
+    </script>
+</body>
+</html>

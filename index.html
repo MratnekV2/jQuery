@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <title>Document</title>
+    <style>
+        #warstwa{
+            
+            width: 200px;
+            height: 200px;
+        }
+        .klasa{
+            color: crimson;
+        }
+        .a{
+            border: black solid 1px;
+            background-color: red;
+        }
+        .b{
+            border: black solid 1px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <button id="przycisk">Kliknij Mnie!</button>
+    <input type="text" id="input">
+    <div id="warstwa">
+        <p>To jest Paragraf</p>
+    </div>
+
+    <button id="dprzycisk">Dodaj tekst</button>
+    <button id="a">Dodaj Klasa A</button>
+    <button id="b">Dodaj Klasa B</button>
+    <label id="hov">Najedź na mnie</label>
+
+    <script>
+        $("#przycisk").click(function(){
+            if($("#warstwa").is(":hidden")){
+                $("#warstwa").show();
+                $("#przycisk").text("Ukryj Warstwę");
+            }else{
+                $("#warstwa").hide();
+                $("#przycisk").text("Pokaż Warstwę");
+            }
+            
+        })
+        $("#dprzycisk").click(function(){
+            $("#warstwa").append($("#input").val());
+        })
+
+        $("#a").click(function(){
+            $("#warstwa").addClass("a");
+            $("#warstwa").removeClass("b");
+        })
+        $("#b").click(function(){
+            $("#warstwa").addClass("b");
+            $("#warstwa").removeClass("a");
+        })
+
+        $("#hov").hover(function(){
+            if($("#warstwa").is(".a")){
+                $("#warstwa").addClass("b");
+                $("#warstwa").removeClass("a");
+            }else{
+                $("#warstwa").addClass("a");
+                $("#warstwa").removeClass("b");
+            }
+        })
+        
+    </script>
+</body>
+</html>
